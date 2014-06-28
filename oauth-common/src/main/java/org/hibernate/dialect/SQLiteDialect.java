@@ -1,4 +1,4 @@
-/*
+package org.hibernate.dialect;/*
  * The author disclaims copyright to this source code.  In place of
  * a legal notice, here is a blessing:
  *
@@ -7,12 +7,12 @@
  *    May you share freely, never taking more than you give.
  *
  */
-package org.hibernate.dialect;
 
 import java.sql.SQLException;
 import java.sql.Types;
 
 import org.hibernate.JDBCException;
+import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.AbstractAnsiTrimEmulationFunction;
 import org.hibernate.dialect.function.NoArgSQLFunction;
 import org.hibernate.dialect.function.SQLFunction;

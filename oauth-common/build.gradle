@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.hibernate:hibernate-entitymanager:4.3.5.Final")
+    compile("org.hibernate:hibernate-validator:5.0.3.Final")
+}

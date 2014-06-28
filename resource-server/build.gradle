@@ -17,4 +17,6 @@ dependencies {
 
     //Database driver
     compile("org.xerial:sqlite-jdbc:3.7.2")
+
+    compile project(":oauth-common")
 }
