@@ -30,7 +30,9 @@ dependencies {
     //Database driver
     compile("org.xerial:sqlite-jdbc:3.7.2")
 
+    //GUI
     compile("org.webjars:bootstrap:3.2.0")
+    compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity3")
 
     compile project(":oauth-common")
 }

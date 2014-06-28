@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController {
 
     @RequestMapping("/")
-    @ResponseBody
     public String root() {
-        return "OAuth server is running.";
+        return "index";
     }
 
     @RequestMapping("/login")

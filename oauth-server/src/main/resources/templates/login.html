@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>OAuth server login</title>
+    <title>OAuth Server Login</title>
     <link rel="stylesheet" href="webjars/bootstrap/3.2.0/css/bootstrap.min.css"/>
 </head>
 <body>
@@ -15,6 +15,23 @@
                     <div th:if="${param.error}">
                         <div class="alert alert-danger">Error logging in.</div>
                     </div>
+
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">You have been logged out.</div>
+                    </div>
+
+                    <p>
+                        Welcome to the OAuth control server. This server generates access tokens for clients of the resource server.
+                        For users it acts as a portal, think of it as the Google/Facebook/Twitter login.
+                        <br/>
+                        You can log in with the following users:
+                        <ul>
+                            <li><b>oauth_admin</b>, password <b>admin</b>. An OAuth admin that can add new client applications.</li>
+                            <li><b>resource_admin</b>, password <b>admin</b>. A user with an admin role on our resource server.</li>
+                            <li><b>user</b>, password <b>user</b>. A standard user for the resource server.</li>
+                        </ul>
+                    </p>
+
                     <form role="form" action="login.do" method="post">
                         <div class="form-group">
                             <label for="name">Name</label>

@@ -27,6 +27,8 @@ public class Credentials {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Authority> authorities;
 
+    private boolean enabled;
+
     public Long getId() {
         return id;
     }
@@ -65,5 +67,13 @@ public class Credentials {
 
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
