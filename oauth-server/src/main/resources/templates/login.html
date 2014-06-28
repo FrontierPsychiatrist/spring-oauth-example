@@ -12,7 +12,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 class="panel-title">Login</h3></div>
                 <div class="panel-body">
-                    <form role="form" action="login" method="post">
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">Error logging in.</div>
+                    </div>
+                    <form role="form" action="login.do" method="post">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" class="form-control" name="name" placeholder="Name"/>
@@ -21,6 +24,7 @@
                             <label for="password">Password</label>
                             <input type="password" id="password" class="form-control" name="password" placeholder="Password"/>
                         </div>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>
                 </div>
