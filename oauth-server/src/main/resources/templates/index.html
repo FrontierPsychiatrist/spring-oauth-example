@@ -13,6 +13,30 @@
             Logged in as: <b><span sec:authentication="name"></span></b><br/>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Approvals</h2>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Client</th>
+                    <th>Scope</th>
+                    <th>Expires at</th>
+                    <th>Actions</th>
+                </tr>
+                <tr th:each="approval : ${approvals}">
+                    <td th:text="${approval.clientId}"></td>
+                    <td th:text="${approval.scope}"></td>
+                    <td th:text="${approval.expiresAt}"></td>
+                    <td>
+                        <a href="/user/revoke" class="btn btn-default btn-xs">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>
