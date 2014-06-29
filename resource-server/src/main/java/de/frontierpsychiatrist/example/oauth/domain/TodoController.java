@@ -9,7 +9,7 @@ import java.util.List;
  * @author Moritz Schulze
  */
 @RestController
-@RequestMapping(value = "/todos", method = {RequestMethod.GET, RequestMethod.OPTIONS})
+@RequestMapping(value = "/todos", method = {RequestMethod.GET})
 public class TodoController {
 
     @Autowired
