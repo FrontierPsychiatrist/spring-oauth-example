@@ -30,7 +30,7 @@ public class OAuthConfiguration extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         TokenStore tokenStore = new JdbcTokenStore(oauthDataSource());
-        resources.resourceId("oauth-services")
+        resources.resourceId("todo-services")
                 .tokenStore(tokenStore);
     }
 
