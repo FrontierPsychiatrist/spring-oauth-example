@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.approval.Approval;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -14,11 +15,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
+
 /**
  * @author Moritz Schulze
  */
 @Controller
-public class LoginController {
+public class IndexController {
 
     @Autowired
     private JdbcClientDetailsService clientDetailsService;
@@ -34,6 +37,18 @@ public class LoginController {
                 .collect(Collectors.toList());
         model.put("approvals", approvals);
         return new ModelAndView("index", model);
+    }
+
+    @Autowired
+    private TokenStore tokenStore;
+
+    @RequestMapping(value = "/approval/revoke", method = RequestMethod.POST)
+    public String revokeApproval(@ModelAttribute Approval approval) {
+        approvalStore.revokeApprovals(asList(approval));
+        tokenStore
+                .findTokensByClientIdAndUserName(approval.getClientId(), approval.getUserId())
+                .forEach(tokenStore::removeAccessToken);
+        return "redirect:/";
     }
 
     @RequestMapping("/login")
