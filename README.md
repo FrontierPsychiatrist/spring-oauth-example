@@ -76,10 +76,12 @@ others can learn from this.
 
 Caveats & Disclaimer
 --------------------
-I am not a security expert, far away from it. I implemented this with my best knowledge on OAuth and Spring Security but I take no guarantee
+I am not a security expert, far from it. I implemented this with my best knowledge on OAuth and Spring Security but I take no guarantee
 that it is usable in a productive application.
 
 I used sqlite for the database because most people will have sqlite on their system and can easily look into the database like this.
+
+It goes without saying that in any production environment all HTTP traffic must be HTTPS, otherwise your tokens and client secrets are sniffable.
 
 License
 -------

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Read only client</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <script type="text/javascript">
+        var app = angular.module('app', []);
+        app.config(function($locationProvider, $httpProvider) {
+            $locationProvider.html5Mode(true).hashPrefix('#!');
+            var token = localStorage.getItem('oauthToken');
+            if(token) {
+                $httpProvider.defaults.headers.common.Authorization = 'Bearer ' + token;
+            }
+            $httpProvider.interceptors.push(function($q, $rootScope) {
+                return {
+                    'responseError': function(response) {
+                        if(response.status === 403) {
+                            $rootScope.$broadcast('forbiddenRequest', response.data);
+                        }
+                        if(response.status === 401) {
+                            $rootScope.$broadcast('unauthorizedRequest', response.data);
+                        }
+                        return response;
+                    }
+                }
+            });
+        });
+
+        app.service('ExtractTokenService', function($location, $http) {
+            var hash = $location.hash();
+            if(hash.indexOf('access_token') > -1) {
+                var extractRegex = /access_token=([a-zA-Z0-9-]*)&/;
+                var result = extractRegex.exec(hash);
+                if(result.length > 1) {
+                    localStorage.setItem('oauthToken', result[1]);
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + result[1];
+                }
+            }
+            $location.hash('');
+        });
+
+        app.controller('HttpCtrl', function(ExtractTokenService, $scope, $location) {
+            $scope.$on('forbiddenRequest', function(event, error) {
+                $scope.error = error;
+            });
+            $scope.$on('unauthorizedRequest', function() {
+                $scope.unauthorized = {
+                    link: 'http://localhost:8081/oauth/authorize?client_id=read-only-client&response_type=token&redirect_uri='+$location.absUrl()
+                }
+            });
+            $scope.dismiss = function() {
+                $scope.error = null;
+            }
+        });
+
+        app.controller('TodoCtrl', function($scope, $http) {
+            $http.get('http://localhost:8080/todos').success(function(todos) {
+                $scope.todos = todos;
+            });
+
+            $scope.switchTodo = function(todo) {
+                if (todo.done) {
+                    todo.doneTime = new Date().getTime();
+                } else {
+                    todo.doneTime = null;
+                }
+                $http.put('http://localhost:8080/todos/ ' + todo.id, todo).error(function() {
+                    //TODO: restore todo
+                });
+            };
+        });
+    </script>
+</head>
+<body ng-app="app">
+<div class="container">
+    <h1 class="page-header">Read only client</h1>
+    <div class="row" ng-controller="HttpCtrl">
+        <div class="col-md-6 col-md-offset-3">
+            <div ng-show="error" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" ng-click="dismiss()">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <strong>{{error.error}}</strong> {{error.error_description}}
+            </div>
+        </div>
+
+        <div class="col-md-6 col-md-offset-3">
+            <div ng-show="unauthorized" class="alert alert-danger alert-dismissible" role="alert">
+                <strong>Unauthorized</strong> Go to <a href="{{unauthorized.link}}">{{unauthorized.link}}</a> to authorize!
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-controller="TodoCtrl">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="todo in todos">
+                            <span ng-style="{'text-decoration': todo.done ? 'line-through' : 'none'}">{{todo.message}}</span>
+                            <input type="checkbox" ng-model="todo.done" ng-change="switchTodo(todo)"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
