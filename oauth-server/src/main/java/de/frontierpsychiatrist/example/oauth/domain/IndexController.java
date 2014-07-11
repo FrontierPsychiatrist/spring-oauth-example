@@ -6,7 +6,9 @@ import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -36,6 +38,7 @@ public class IndexController {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
         model.put("approvals", approvals);
+        model.put("clientDetails", clientDetailsService.listClientDetails());
         return new ModelAndView("index", model);
     }
 

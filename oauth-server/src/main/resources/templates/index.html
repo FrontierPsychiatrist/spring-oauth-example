@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1 class="page-header">OAuth Server</h1>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -15,8 +16,9 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-md-offset-3">
             <h2>Approvals</h2>
+
             <p>
                 If you revoke the approval for one scope of a client all tokens for that client will be removed as well.
             </p>
@@ -44,6 +46,36 @@
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1" sec:authorize="hasRole('ROLE_OAUTH_ADMIN')">
+            <h2>Clients</h2>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Client ID</th>
+                    <th>Resource IDs</th>
+                    <th>Scopes</th>
+                    <th>Grant Types</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+                <tr th:each="client : ${clientDetails}">
+                    <td th:text="${client.clientId}"></td>
+                    <td th:text="${client.resourceIds}"></td>
+                    <td th:text="${client.scope}"></td>
+                    <td th:text="${client.authorizedGrantTypes}"></td>
+                    <td th:text="${client.authorities}"></td>
+                    <td>
+                        <a class="btn btn-default btn-xs" th:href="'/clients/' + ${client.clientId} + '/edit'">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a class="btn btn-default btn-xs" th:href="'/clients/' + ${client.clientId} + '/delete'">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
                     </td>
                 </tr>
             </table>

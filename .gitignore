@@ -5,3 +5,5 @@ atlassian-ide-plugin.xml
 
 # Build
 build/
+out/
+.gradle/
