@@ -5,7 +5,7 @@ a resource server.
 
 Also included are some example client applications for the resource server.
 
-It's a pretty modern application, using Spring Boot, gradle, thymeleaf and only JavaConfig. In my opinion tt's also a good example of how Java applications
+It's a pretty modern application, using Spring Boot, gradle, thymeleaf and only JavaConfig. In my opinion it's also a good example of how Java applications
 aren't big bloated "enterprisy" things anymore. The current sloccount is 519. 178 of that are just the SQLite dialect for hibernate which
 I had to include because it's not in the official packages.
 
