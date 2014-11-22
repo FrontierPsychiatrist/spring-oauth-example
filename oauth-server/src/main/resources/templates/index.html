@@ -6,9 +6,8 @@
     <link rel="stylesheet" href="webjars/bootstrap/3.2.0/css/bootstrap.min.css"/>
 </head>
 <body>
-<h1 class="page-header">OAuth Server</h1>
-
 <div class="container">
+    <h1 class="page-header">OAuth Server</h1>
     <div class="row">
         <div class="col-md-12">
             Logged in as: <b><span sec:authentication="name"></span></b><br/>
@@ -70,11 +69,18 @@
                     <td th:text="${client.authorizedGrantTypes}"></td>
                     <td th:text="${client.authorities}"></td>
                     <td>
-                        <a class="btn btn-default btn-xs" th:href="'/clients/' + ${client.clientId} + '/edit'">
+                        <a class="btn btn-default btn-xs" th:href="'/clients/form?client=' + ${client.clientId}">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
                         <a class="btn btn-default btn-xs" th:href="'/clients/' + ${client.clientId} + '/delete'">
                             <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <a class="btn btn-default btn-xs pull-right" href="/clients/form">
+                            <span class="glyphicon glyphicon-plus"></span>
                         </a>
                     </td>
                 </tr>
