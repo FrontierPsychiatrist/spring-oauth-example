@@ -5,7 +5,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.9.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.0.RELEASE")
     }
 }
 apply plugin: 'spring-boot'
@@ -25,7 +25,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 
     //OAuth
-    compile("org.springframework.security.oauth:spring-security-oauth2:2.0.4.RELEASE")
+    compile("org.springframework.security.oauth:spring-security-oauth2:2.0.5.RELEASE")
 
     //Database driver
     compile("org.xerial:sqlite-jdbc:3.7.2")

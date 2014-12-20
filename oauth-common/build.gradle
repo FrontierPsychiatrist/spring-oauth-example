@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.data:spring-data-jpa:1.6.4.RELEASE") {
+    compile("org.springframework.data:spring-data-jpa:1.7.1.RELEASE") {
         exclude group: 'org.aspectj'
         exclude group: 'org.springframework'
     }
