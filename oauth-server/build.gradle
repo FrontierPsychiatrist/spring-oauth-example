@@ -28,7 +28,9 @@ dependencies {
     compile("org.springframework.security.oauth:spring-security-oauth2:2.0.5.RELEASE")
 
     //Database driver
-    compile("org.xerial:sqlite-jdbc:3.7.2")
+    compile("org.xerial:sqlite-jdbc:3.8.7")
+
+    compile("org.flywaydb:flyway-core")
 
     //GUI
     compile("org.webjars:bootstrap:3.2.0")
