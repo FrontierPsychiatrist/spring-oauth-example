@@ -8,13 +8,13 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.data:spring-data-jpa:1.7.1.RELEASE") {
+    compile("org.springframework.data:spring-data-jpa:1.9.4.RELEASE") {
         exclude group: 'org.aspectj'
         exclude group: 'org.springframework'
     }
-    compile("org.springframework.security:spring-security-core:3.2.5.RELEASE") {
+    compile("org.springframework.security:spring-security-core:4.0.4.RELEASE") {
         exclude group: 'org.springframework'
     }
-    compile("org.hibernate:hibernate-entitymanager:4.3.7.Final")
-    compile("org.hibernate:hibernate-validator:5.0.3.Final")
+    compile("org.hibernate:hibernate-entitymanager:4.3.11.Final")
+    compile("org.hibernate:hibernate-validator:5.2.4.Final")
 }
