@@ -67,7 +67,7 @@
                 } else {
                     todo.doneTime = null;
                 }
-                $http.put('http://localhost:8080/todos/ ' + todo.id, todo).error(function() {
+                $http.put('http://localhost:8080/todos/' + todo.id, todo).error(function() {
                     //TODO: restore todo
                 });
             };

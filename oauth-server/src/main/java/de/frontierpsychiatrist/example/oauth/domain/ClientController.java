@@ -2,7 +2,6 @@ package de.frontierpsychiatrist.example.oauth.domain;
 
 import de.frontierpsychiatrist.example.oauth.editors.AuthorityPropertyEditor;
 import de.frontierpsychiatrist.example.oauth.editors.SplitCollectionEditor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -23,8 +22,11 @@ import java.util.Set;
 @RequestMapping("/clients")
 public class ClientController {
 
-    @Autowired
-    private JdbcClientDetailsService clientDetailsService;
+    private final JdbcClientDetailsService clientDetailsService;
+
+    public ClientController(JdbcClientDetailsService clientDetailsService) {
+        this.clientDetailsService = clientDetailsService;
+    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -41,7 +43,7 @@ public class ClientController {
      * @param model The Spring MVC model.
      * @return clients/form view
      */
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    @GetMapping(value = "/form")
     @PreAuthorize("hasRole('ROLE_OAUTH_ADMIN')")
     public String showEditOrAddForm(@RequestParam(value = "client", required = false) String clientId, Model model) {
         ClientDetails clientDetails;
@@ -60,7 +62,7 @@ public class ClientController {
      * @param newClient Indicates if this is a new client. If null it's an existing client.
      * @return redirects to the root.
      */
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @PostMapping(value = "/edit")
     @PreAuthorize("hasRole('ROLE_OAUTH_ADMIN')")
     public String editClient(
             @ModelAttribute BaseClientDetails clientDetails,

@@ -1,20 +1,15 @@
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-version = '1.0'
-
-repositories {
-    mavenCentral()
+bootRepackage {
+    enabled = false
 }
 
 dependencies {
-    compile("org.springframework.data:spring-data-jpa:1.9.4.RELEASE") {
+    compile("org.springframework.data:spring-data-jpa") {
         exclude group: 'org.aspectj'
         exclude group: 'org.springframework'
     }
-    compile("org.springframework.security:spring-security-core:4.0.4.RELEASE") {
+    compile("org.springframework.security:spring-security-core") {
         exclude group: 'org.springframework'
     }
-    compile("org.hibernate:hibernate-entitymanager:4.3.11.Final")
-    compile("org.hibernate:hibernate-validator:5.2.4.Final")
+    compile("org.hibernate:hibernate-entitymanager")
+    compile("org.hibernate:hibernate-validator")
 }

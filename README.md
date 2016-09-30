@@ -33,7 +33,7 @@ Just tell me how to run it
     [http://localhost:8080](http://localhost:8080).
 * Additionally you can start a http server in example-clients/html, e.g. like this
 
-        cd example-clients/html
+        cd example-clients/html/read-only
         ruby -run -e httpd . -p 9090
         
     It will be reachable under [http://localhost:9090](http://localhost:9090).

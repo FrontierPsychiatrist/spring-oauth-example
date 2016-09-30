@@ -1,14 +1,13 @@
 package de.frontierpsychiatrist.example.oauth.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.approval.Approval;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -25,13 +24,17 @@ import static java.util.Arrays.asList;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private JdbcClientDetailsService clientDetailsService;
+    private final JdbcClientDetailsService clientDetailsService;
+    private final ApprovalStore approvalStore;
+    private final TokenStore tokenStore;
 
-    @Autowired
-    private ApprovalStore approvalStore;
+    public IndexController(JdbcClientDetailsService clientDetailsService, ApprovalStore approvalStore, TokenStore tokenStore) {
+        this.clientDetailsService = clientDetailsService;
+        this.approvalStore = approvalStore;
+        this.tokenStore = tokenStore;
+    }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public ModelAndView root(Map<String, Object> model, Principal principal) {
         List<Approval> approvals = clientDetailsService.listClientDetails().stream()
                 .map(clientDetail -> approvalStore.getApprovals(principal.getName(), clientDetail.getClientId()))
@@ -42,10 +45,7 @@ public class IndexController {
         return new ModelAndView("index", model);
     }
 
-    @Autowired
-    private TokenStore tokenStore;
-
-    @RequestMapping(value = "/approval/revoke", method = RequestMethod.POST)
+    @PostMapping(value = "/approval/revoke")
     public String revokeApproval(@ModelAttribute Approval approval) {
         approvalStore.revokeApprovals(asList(approval));
         tokenStore
@@ -54,7 +54,7 @@ public class IndexController {
         return "redirect:/";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String loginPage() {
         return "login";
     }

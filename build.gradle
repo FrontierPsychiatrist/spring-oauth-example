@@ -1,3 +1,24 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://repo.spring.io/libs-release"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
+    }
+}
+
+subprojects {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+    repositories {
+        mavenCentral()
+    }
+}
+
 version = '1.0'
 
 task wrapper(type: Wrapper) {

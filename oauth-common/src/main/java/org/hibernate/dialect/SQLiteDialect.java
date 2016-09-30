@@ -8,19 +8,10 @@ package org.hibernate.dialect;/*
  *
  */
 
-import java.sql.SQLException;
-import java.sql.Types;
-
-import org.hibernate.JDBCException;
-import org.hibernate.dialect.Dialect;
-import org.hibernate.dialect.function.AbstractAnsiTrimEmulationFunction;
-import org.hibernate.dialect.function.NoArgSQLFunction;
-import org.hibernate.dialect.function.SQLFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
-import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.dialect.function.VarArgsSQLFunction;
-import org.hibernate.exception.*;
+import org.hibernate.dialect.function.*;
 import org.hibernate.type.StandardBasicTypes;
+
+import java.sql.Types;
 
 public class SQLiteDialect extends Dialect {
     public SQLiteDialect() {
@@ -89,25 +80,10 @@ public class SQLiteDialect extends Dialect {
         return true;
     }
 
-  /*
-  public boolean supportsInsertSelectIdentity() {
-    return true; // As specified in NHibernate dialect
-  }
-  */
-
     @Override
     public boolean hasDataTypeInIdentityColumn() {
         return false; // As specified in NHibernate dialect
     }
-
-  /*
-  public String appendIdentitySelectToInsert(String insertString) {
-    return new StringBuffer(insertString.length()+30). // As specified in NHibernate dialect
-      append(insertString).
-      append("; ").append(getIdentitySelectString()).
-      toString();
-  }
-  */
 
     @Override
     public String getIdentityColumnString() {
@@ -134,28 +110,6 @@ public class SQLiteDialect extends Dialect {
     protected String getLimitString(String query, boolean hasOffset) {
         return query + (hasOffset ? " limit ? offset ?" : " limit ?");
     }
-
-    @Override
-    public boolean supportsTemporaryTables() {
-        return true;
-    }
-
-    @Override
-    public String getCreateTemporaryTableString() {
-        return "create temporary table if not exists";
-    }
-
-    @Override
-    public Boolean performTemporaryTableDDLInIsolation() {
-        return Boolean.FALSE;
-    }
-
-  /*
-  @Override
-  public boolean dropTemporaryTableAfterUse() {
-    return true; // temporary tables are only dropped when the connection is closed. If the connection is pooled...
-  }
-  */
 
     @Override
     public boolean supportsCurrentTimestampSelection() {
@@ -200,12 +154,6 @@ public class SQLiteDialect extends Dialect {
         return false;
     }
 
-  /*
-  public String getAddColumnString() {
-    return "add column";
-  }
-  */
-
     @Override
     public String getForUpdateString() {
         return "";
@@ -237,18 +185,6 @@ public class SQLiteDialect extends Dialect {
     public boolean supportsIfExistsBeforeTableName() {
         return true;
     }
-
-  /*
-  public boolean supportsCascadeDelete() {
-    return true;
-  }
-  */
-
-  /* not case insensitive for unicode characters by default (ICU extension needed)
-  public boolean supportsCaseInsensitiveLike() {
-    return true;
-  }
-  */
 
     @Override
     public boolean supportsTupleDistinctCounts() {

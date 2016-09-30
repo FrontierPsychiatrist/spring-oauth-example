@@ -1,5 +1,6 @@
 package de.frontierpsychiatrist.example.oauth;
 
+import de.frontierpsychiatrist.example.oauth.domain.CredentialsRepository;
 import de.frontierpsychiatrist.example.oauth.domain.JdbcUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +19,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return new JdbcUserDetailsService();
+    public UserDetailsService userDetailsService(CredentialsRepository credentialsRepository) {
+        return new JdbcUserDetailsService(credentialsRepository);
     }
 
     @Override
@@ -42,8 +42,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .logout()
                 //To match GET requests we have to use a request matcher.
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout.do"))
-            .and()
-            .userDetailsService(userDetailsService());
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout.do"));
     }
 }

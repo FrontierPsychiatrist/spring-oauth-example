@@ -1,6 +1,5 @@
 package de.frontierpsychiatrist.example.oauth.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,8 +10,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class JdbcUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private CredentialsRepository credentialsRepository;
+    private final CredentialsRepository credentialsRepository;
+
+    public JdbcUserDetailsService(CredentialsRepository credentialsRepository) {
+        this.credentialsRepository = credentialsRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
