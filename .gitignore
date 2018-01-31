@@ -7,3 +7,6 @@ atlassian-ide-plugin.xml
 build/
 out/
 .gradle/
+
+# SQLlite databases
+/*.db
