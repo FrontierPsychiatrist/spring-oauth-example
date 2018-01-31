@@ -23,11 +23,11 @@ Just tell me how to run it
     It will download a local gradle. On Windows use `gradlew.bat`.
 * Start the authorization server with
 
-        java -jar oauth-server/build/libs/oauth-server-1.0.jar
+        java -jar oauth-server/build/libs/oauth-server.jar
         
     And the resource server with
   
-        java -jar resource-server/build/libs/resource-server-1.0.jar
+        java -jar resource-server/build/libs/resource-server.jar
         
     The authorization server runs under [http://localhost:8081](http://localhost:8081) and the resource server under
     [http://localhost:8080](http://localhost:8080).
