@@ -44,6 +44,13 @@ If you want to play around with the java code it's more practicable to start fro
 `ResourceServerMain`. The working directory to execute in should be the directory in which you cloned into because the database files are
 expected there.
 
+In IDE open terminal and build project, to generate jar files:
+`./gradlew build`
+
+Then start server as admin to allow create DB file:
+
+`sudo java -jar /PATH_TO_CLONED_PROJECT_ROOT/spring-oauth-example/oauth-server/build/libs/oauth-server.jar`
+
 What to do when it is running?
 ------------------------------
 The OAuth server is fairly self explanatory. Just open [http://localhost:8081](http://localhost:8081) in a browser. You can login as
