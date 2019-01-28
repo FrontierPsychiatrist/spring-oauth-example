@@ -24,7 +24,7 @@ public class TodoController {
 
     @GetMapping("/{id}")
     public Todo oneTodo(@PathVariable("id") Long id) {
-        return todoRepository.findOne(id);
+        return todoRepository.getOne(id);
     }
 
     @GetMapping("/search/findByMessageLike")

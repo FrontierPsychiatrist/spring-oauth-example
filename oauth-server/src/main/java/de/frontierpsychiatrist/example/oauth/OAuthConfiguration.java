@@ -1,7 +1,7 @@
 package de.frontierpsychiatrist.example.oauth;
 
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource_oauth")
+    @ConfigurationProperties(prefix = "spring.datasource-oauth")
     public DataSource oauthDataSource() {
         return DataSourceBuilder.create().build();
     }

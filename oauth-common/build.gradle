@@ -1,7 +1,3 @@
-bootRepackage {
-    enabled = false
-}
-
 dependencies {
     compile("org.springframework.data:spring-data-jpa") {
         exclude group: 'org.aspectj'
@@ -11,5 +7,5 @@ dependencies {
         exclude group: 'org.springframework'
     }
     compile("org.hibernate:hibernate-entitymanager")
-    compile("org.hibernate:hibernate-validator")
+    compile("org.hibernate.validator:hibernate-validator")
 }

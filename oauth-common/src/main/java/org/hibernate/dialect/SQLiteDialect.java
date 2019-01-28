@@ -76,27 +76,6 @@ public class SQLiteDialect extends Dialect {
     }
 
     @Override
-    public boolean supportsIdentityColumns() {
-        return true;
-    }
-
-    @Override
-    public boolean hasDataTypeInIdentityColumn() {
-        return false; // As specified in NHibernate dialect
-    }
-
-    @Override
-    public String getIdentityColumnString() {
-        // return "integer primary key autoincrement";
-        return "integer";
-    }
-
-    @Override
-    public String getIdentitySelectString() {
-        return "select last_insert_rowid()";
-    }
-
-    @Override
     public boolean supportsLimit() {
         return true;
     }

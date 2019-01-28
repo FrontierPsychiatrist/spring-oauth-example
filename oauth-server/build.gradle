@@ -1,3 +1,7 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-security")
@@ -14,7 +18,7 @@ dependencies {
 
     //GUI
     compile("org.webjars:bootstrap:3.2.0")
-    compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4")
+    compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
 
     compile project(":oauth-common")
 }
