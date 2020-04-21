@@ -11,5 +11,8 @@ dependencies {
 
     compile("org.flywaydb:flyway-core")
 
+    compile("jakarta.xml.bind:jakarta.xml.bind-api:2.3.2")
+    compile("org.glassfish.jaxb:jaxb-runtime:2.3.2")
+
     compile project(":oauth-common")
 }
