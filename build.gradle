@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven {
-            url "http://repo.spring.io/libs-release"
+            url "https://repo.spring.io/libs-release"
         }
     }
     dependencies {
